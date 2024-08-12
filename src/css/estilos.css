@@ -1,0 +1,98 @@
+body{
+    font-family: "Poppins", sans-serif;
+    background-color: black;
+    max-width: 1280px; /* largura max do nosso corpo sera de 1280 pixels (unidade de medida) */
+    margin: 0 auto; /* zero em cima e em baixo auto na esquerda e na direita, ele vai centralizar, pegando o espaco q sobrou e vai dividir por 2 e colocar na esquerda e na direita*/
+}
+
+/*colocamos a propriedade de posicao fixa e fixamos a imagem da classe carrossel ( para classes utilizamos .nomedaclasse ), fazendo ela ocupar todo o espaço de largura e altura da pg*/
+.carrossel{
+    position: fixed;
+    /*posicionamos a imagem desde do topo e o lado esquerdo, com o width definimos que a largura da div carrossel ocupe 100% da tela */
+    top:0;
+    left:0;
+    width: 100%;
+    z-index: -1;
+}
+.informacoes{
+    display: none; /*escondeu todo o texto dos dragoes q estao na div classe informacoes, para mostrar o primeiro texto de acordo com a imagem iremos utilizar: */
+}
+.informacoes.ativa{
+    display: block;
+}
+.conteudo{
+    /*O display: flex funciona de uma maneira diferente dos outros displays. Quando colocamos essa propriedade em um elemento, esse elemento se torna um flex container, a partir daí podemos manipular todos os elementos filhos desse flex container com propriedades novas*/
+    display: flex;
+    flex-direction: column; /*direcao do flex de coluna, vai fazer com que os botoes voltem a posicao abaixo do texto, pois ele ja veio em row(um ao lado do outro) assim que assionamos o display: flex pois eh padrao do css */
+    justify-content: space-evenly; /* ira justificar o conteudo: espacando os elementos uniformemente */
+    min-height: 100vh; /*altura minima de 100vh (outra medida relativa)*/
+}
+.informacoes h1{
+    font-size: 35px;
+    color:#ffffff;
+    margin-bottom: 80px; /*dar uma margem abaixo de 80 pixels */
+    font-family: "GOT";
+    letter-spacing: 8px;
+}
+@font-face{
+    font-family: "GOT";
+    src: url(../fontes/GOT.ttf);
+}
+.informacoes .descricao{
+    width: 49%;
+    font-size: 24px;
+    color: #ffffff;
+    line-height: 40px;/* espaca as linhas */
+
+    /*caso tenha mt texto, ele pode criar uma rolagem*/
+    height: 300px;
+    overflow: auto;
+    padding: 15px;
+}
+.botoes-carrossel{
+    display: flex;
+    justify-content: center; /* to justificando o conteudo ao centro */
+    gap: 20px; /* gap seria um espacamento tb */
+}
+.botoes-carrossel .botao{
+    background-color: #ffffff;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* arrendondando os botoes */
+    border: 2px solid transparent; /* adicionei uma borda de 2px solida transparente */
+    cursor: pointer; /* aparece a maozinha p/ apontar */
+    border-color: #ffffff9d;
+}
+.botoes-carrossel .botao.selecionado{
+    background-color: #1c7a3a;
+}
+.imagem{
+    width: 100vw; /* largula da tela */
+    height: 100vh;/* altura da tela */
+    object-fit: cover; /*vai adequar a imagem*/
+    display: none;
+}
+.imagem.ativa{
+    display: block;
+    animation: mudarImagem 0.7s; /*tempo que vai durar a animacao*/
+}
+/*keyframes vao ser utilizados p/ definir uma serie de passos p/ criar uma animacao. Cada keyframe vai mudar de estilo em diferentes pontos da animacao. Aqui definimos uma opacidade inicial ao visualizar de inicio a imagem no navegador */
+@keyframes mudarImagem{
+from{
+    opacity: 0.85;
+}
+to{
+    opacity: 1;
+}
+}
+/*Depois do main, vai adicionar um pseudo elemento*/
+main::after{
+    content: "";
+    min-height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top:0;
+    left:0;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.05926120448179273) 50%, rgba(0, 0, 0, 1) 90%);/* aparece visualmente o degrade em preto*/
+    z-index: -1;
+}
